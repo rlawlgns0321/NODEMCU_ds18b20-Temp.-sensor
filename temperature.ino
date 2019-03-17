@@ -2,10 +2,9 @@
 #include <DallasTemperature.h>
 #include <OneWire.h>
 
-#define ONE_WIRE_BUS 2                       //D2 pin of nodemcu
+#define ONE_WIRE_BUS 2                       
 OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);            // Pass the oneWire reference to Dallas Temperature.
-
+DallasTemperature sensors(&oneWire);            
 const char* server = "api.thingspeak.com";
 String apiKey = "L3S0NR6OYCQ0F69J";
 const char* MY_SSID = "Xiaomi_F705";
@@ -25,11 +24,11 @@ void loop(void)
 { 
   float temp;
   Serial.print("Requesting temperature...");
-  sensors.requestTemperatures();// Send the command to get temperatures
+  sensors.requestTemperatures();
   temp = sensors.getTempCByIndex(0);
   Serial.println("DONE");  
   Serial.print("Temperature is: ");
-  Serial.println(temp);   // Why "byIndex"? You can have more than one IC on the same bus. 0 refers to the first IC on the wire
+  Serial.println(temp);   
   sendTemperatureTS(temp);
   delay(60000);
 }
